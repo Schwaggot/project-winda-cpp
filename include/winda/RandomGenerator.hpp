@@ -23,10 +23,10 @@ public:
         return gen();
     }
 
-    uint8_t randomPersonHeight() {
+    float randomPersonHeight() {
         static auto gen = std::bind(std::uniform_int_distribution<>(150, 190),
                                     std::default_random_engine());
-        return static_cast<uint8_t>(gen());
+        return static_cast<float>(gen()) / 100.f;
     }
 
     uint8_t randomPersonAge() {

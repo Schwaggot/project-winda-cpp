@@ -35,10 +35,10 @@ public:
         // see https://en.wikipedia.org/wiki/Human_body_weight#Hamwi_method
         switch (mGender) {
         case MALE:
-            mWeight = 48.f + 1.1f * ((float)mHeight - 152.f);
+            mWeight = 48.f + 1.1f * ((float)mHeight - 1.52f) * 100.f;
             break;
         case FEMALE:
-            mWeight = 45.4f + 0.9f * ((float)mHeight - 152.f);
+            mWeight = 45.4f + 0.9f * ((float)mHeight - 1.52f) * 100.f;
             break;
         }
     }
@@ -56,8 +56,8 @@ private:
     std::string mName;
     Gender mGender = MALE;
     uint8_t mAge;
-    float mWeight; // in meters
-    float mHeight; // in centimeters
+    float mWeight; // in kg
+    float mHeight; // in meters
 };
 
 } // namespace winda
@@ -72,7 +72,7 @@ struct fmt::formatter<winda::Person> {
     template <typename FormatContext>
     auto format(winda::Person const& person, FormatContext& ctx) {
         return fmt::format_to(
-            ctx.out(), "Person name={} gender={} age={} weight={}kg height={}cm",
+            ctx.out(), "Person name={} gender={} age={} weight={:2.1f}kg height={:1.2f}m",
             person.name(), person.gender() == winda::Person::MALE ? "MALE" : "FEMALE",
             person.age(), person.weight(), person.height());
     }
